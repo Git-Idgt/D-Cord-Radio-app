@@ -6,11 +6,24 @@ import { SongDisplay } from "@/components/song-display";
 import { Toaster } from "@/components/ui/toaster";
 import { useEffect, useRef, useState } from "react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Slider } from "@/components/ui/slider";
+import { Select } from "@/components/ui/select";
+import {
+  SelectValue,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
 
 export default function Home() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [hasCameraPermission, setHasCameraPermission] = useState(false);
   const [rtmpUrl, setRtmpUrl] = useState<string | null>(null);
+  const [volume, setVolume] = useState(50);
+  const [quality, setQuality] = useState("720p");
+  const [previousSong, setPreviousSong] = useState("Yesterday - The Beatles");
+  const [nextSong, setNextSong] = useState("Let It Be - The Beatles");
+  const [isPlaying, setIsPlaying] = useState(true);
 
   useEffect(() => {
     const getCameraPermission = async () => {
@@ -20,6 +33,7 @@ export default function Home() {
 
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
+          videoRef.current.volume = volume / 100;
         }
 
         // Replace with your actual RTMP URL
@@ -31,7 +45,31 @@ export default function Home() {
     };
 
     getCameraPermission();
-  }, []);
+  }, [volume]);
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  const handleVolumeChange = (value: number[]) => {
+    setVolume(value[0]);
+    if (videoRef.current) {
+      videoRef.current.volume = value[0] / 100;
+    }
+  };
+
+  const handleQualityChange = (value: string) => {
+    setQuality(value);
+    // TODO: Implement quality switching logic here.
+    console.log("Quality changed to:", value);
+  };
 
   return (
     <div className="flex flex-col h-screen w-full bg-background py-4 px-6">
@@ -70,6 +108,53 @@ export default function Home() {
           <SongDisplay />
           <AICard />
           <ChatInput />
+
+          {/* Stream Controls */}
+          <div className="flex flex-col items-center w-full max-w-md mt-4">
+            <h3 className="text-lg font-semibold text-foreground mb-2">Stream Controls</h3>
+
+            {/* Start/Stop Button */}
+            <button
+              onClick={togglePlay}
+              className="bg-primary text-primary-foreground rounded-md px-4 py-2 hover:bg-primary/90 mb-2"
+            >
+              {isPlaying ? "Pause" : "Play"}
+            </button>
+
+            {/* Volume Control */}
+            <div className="w-full mb-2">
+              <label className="block text-sm font-medium text-foreground mb-1">Volume</label>
+              <Slider
+                defaultValue={[volume]}
+                max={100}
+                step={1}
+                onValueChange={handleVolumeChange}
+              />
+            </div>
+
+            {/* Video Quality Adjustment */}
+            <div className="w-full mb-2">
+              <label className="block text-sm font-medium text-foreground mb-1">Video Quality</label>
+              <Select value={quality} onValueChange={handleQualityChange}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select quality" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="360p">360p</SelectItem>
+                  <SelectItem value="480p">480p</SelectItem>
+                  <SelectItem value="720p">720p</SelectItem>
+                  <SelectItem value="1080p">1080p</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Previous/Next Song */}
+            <div className="w-full">
+              <p className="text-sm text-muted-foreground">Previous Song: {previousSong}</p>
+              <p className="text-sm text-muted-foreground">Next Song: {nextSong}</p>
+            </div>
+          </div>
+
           <Toaster />
         </div>
       </div>
