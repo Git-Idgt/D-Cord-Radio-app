@@ -35,7 +35,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex items-start justify-start h-screen bg-background py-8 w-full">
+    <div className="flex items-center justify-start h-screen bg-background py-8 w-full">
       {/* Video Stream Container */}
       <div className="w-1/2 p-4">
         <video ref={videoRef} className="w-full aspect-video rounded-md" autoPlay muted />
@@ -60,4 +60,3 @@ export default function Home() {
     </div>
   );
 }
-
