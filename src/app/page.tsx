@@ -87,11 +87,11 @@ export default function Home() {
       <div className="flex flex-grow">
 
         {/* Video Stream Container */}
-        <div className="w-1/2 flex items-center justify-center">
+        <div className="w-1/2 flex flex-col items-center justify-start">
           {rtmpUrl ? (
-            <video src={rtmpUrl} ref={videoRef} className="w-full max-h-full rounded-md" autoPlay muted controls />
+            <video src={rtmpUrl} ref={videoRef} className="w-full rounded-md" autoPlay muted controls />
           ) : (
-            <video ref={videoRef} className="w-full max-h-full rounded-md" autoPlay muted />
+            <video ref={videoRef} className="w-full rounded-md" autoPlay muted />
           )}
           {!(hasCameraPermission) && (
             <Alert variant="destructive">
@@ -101,16 +101,9 @@ export default function Home() {
               </AlertDescription>
             </Alert>
           )}
-        </div>
 
-        {/* Content Container */}
-        <div className="flex flex-col items-center justify-start w-1/2 p-4">
-          <SongDisplay />
-          <AICard />
-          <ChatInput />
-
-          {/* Stream Controls */}
-          <div className="flex flex-col items-center w-full max-w-md mt-4">
+            {/* Stream Controls */}
+            <div className="flex flex-col items-center w-full max-w-md mt-4">
             <h3 className="text-lg font-semibold text-foreground mb-2">Stream Controls</h3>
 
             {/* Start/Stop Button */}
@@ -147,12 +140,19 @@ export default function Home() {
                 </SelectContent>
               </Select>
             </div>
+          </div>
+        </div>
 
-            {/* Previous/Next Song */}
-            <div className="w-full">
-              <p className="text-sm text-muted-foreground">Previous Song: {previousSong}</p>
-              <p className="text-sm text-muted-foreground">Next Song: {nextSong}</p>
-            </div>
+        {/* Content Container */}
+        <div className="flex flex-col items-center justify-start w-1/2 p-4">
+          <SongDisplay />
+          <AICard />
+          <ChatInput />
+
+          {/* Previous/Next Song */}
+          <div className="w-full">
+            <p className="text-sm text-muted-foreground">Previous Song: {previousSong}</p>
+            <p className="text-sm text-muted-foreground">Next Song: {nextSong}</p>
           </div>
 
           <Toaster />
