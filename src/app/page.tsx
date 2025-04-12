@@ -38,8 +38,8 @@ export default function Home() {
       {/* D-Cord Radio Title */}
       <div className="flex justify-center mb-2">
         <svg width="400" height="80" viewBox="0 0 800 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fontSize="80" fill="hsl(var(--primary))"
-            style={{ fontFamily: 'FancyText, Arial, sans-serif', fontWeight: 'bold', fontStyle: 'italic' }}>
+          <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fontSize="72" fill="hsl(var(--primary))"
+            style={{ fontFamily: 'FancyText, Arial, sans-serif', fontWeight: 'bold'}}>
             D-Cord Radio
           </text>
         </svg>
