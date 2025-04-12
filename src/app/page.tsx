@@ -75,7 +75,7 @@ export default function Home() {
     <div className="flex flex-col h-screen w-full bg-background py-4 px-6">
       {/* D-Cord Radio Title */}
       <div className="flex justify-center mb-2">
-        <svg width="400" height="80" viewBox="0 0 800 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="66%" height="80" viewBox="0 0 800 160" fill="none" xmlns="http://www.w3.org/2000/svg">
           <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fontSize="72" fill="hsl(var(--primary))"
             style={{ fontFamily: 'FancyText, Arial, sans-serif', fontWeight: 'bold'}}>
             D-Cord Radio
@@ -87,7 +87,7 @@ export default function Home() {
       <div className="flex flex-grow">
 
         {/* Video Stream Container */}
-        <div className="w-1/2 flex flex-col items-center justify-start">
+        <div className="w-1/2 flex flex-col items-center justify-center">
           {rtmpUrl ? (
             <video src={rtmpUrl} ref={videoRef} className="w-full rounded-md" autoPlay muted controls />
           ) : (
@@ -145,7 +145,6 @@ export default function Home() {
 
         {/* Content Container */}
         <div className="flex flex-col items-center justify-start w-1/2 p-4">
-          <SongDisplay />
           <AICard />
           <ChatInput />
 
