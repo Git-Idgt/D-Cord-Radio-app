@@ -86,7 +86,7 @@ export default function Home() {
       <div className="flex flex-grow w-full justify-center">
 
         {/* Video Stream Container */}
-        <div className="w-1/2 flex flex-col items-center justify-center">
+        <div className="w-1/2 flex flex-col items-center justify-start">
           {rtmpUrl ? (
             <video src={rtmpUrl} ref={videoRef} className="w-full rounded-md" autoPlay muted controls style={{ maxHeight: '400px' }} />
           ) : (
@@ -101,8 +101,8 @@ export default function Home() {
             </Alert>
           )}
 
-            {/* Stream Controls */}
-            <div className="flex flex-col items-center w-full max-w-md mt-4">
+          {/* Stream Controls */}
+          <div className="flex flex-col items-center w-full max-w-md mt-4">
             <h3 className="text-lg font-semibold text-foreground mb-2">Stream Controls</h3>
 
             {/* Start/Stop Button */}
@@ -144,10 +144,13 @@ export default function Home() {
 
         {/* Content Container */}
         <div className="flex flex-col items-center justify-start w-1/2 p-4">
-          <ChatInput />
+          {/* Chat Input */}
+          <div className="w-full">
+            <ChatInput />
+          </div>
 
           {/* Previous/Next Song */}
-          <div className="w-full">
+          <div className="w-full mt-4 flex flex-col items-center">
             <p className="text-sm text-muted-foreground">Previous Song: {previousSong}</p>
             <p className="text-sm text-muted-foreground">Next Song: {nextSong}</p>
           </div>
