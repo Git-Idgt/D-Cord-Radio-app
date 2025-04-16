@@ -1,4 +1,4 @@
-# D-Coord Radio Web APP
+# D-Cord Radio Web APP
 
 ...To be continued, it's a work in progress.
 
