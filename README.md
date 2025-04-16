@@ -1,5 +1,5 @@
-# Firebase Studio
+# D-Coord Radio Web APP
 
-This is a NextJS starter in Firebase Studio.
+...To be continued, it's a work in progress.
 
-To get started, take a look at src/app/page.tsx.
+So stay tuned for more updates and launch dates, coming soon!
